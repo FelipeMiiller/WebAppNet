@@ -13,4 +13,13 @@ public class Category
         Nome = nome;
         CreationDate = DateTime.Now;
     }
+
+
+    public Category()
+    {
+        Id = Guid.NewGuid();
+        Nome = string.Empty;
+        ;
+        CreationDate = DateTime.Now;
+    }
 }

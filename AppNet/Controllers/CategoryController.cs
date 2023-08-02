@@ -20,7 +20,11 @@ public class CategoryController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateCategory([FromBody] NewCategory request)
     {
-        if (!await _categoryRepository.Exists(request.nome)) return BadRequest("Category already exists! ");
+       
+        if (await _categoryRepository.Exists(request.nome))
+        {
+            return BadRequest("Category already exists! ");
+        }
         
         await _categoryRepository.NewCategoryAsync(new Category(request.nome));
         
