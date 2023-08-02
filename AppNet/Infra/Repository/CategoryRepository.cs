@@ -37,6 +37,8 @@ public class CategoryRepository : ICategoryRepository
     {
         return await _context.Categories.AnyAsync(c => c.Nome == nome);
     }
+    
+    
 
     public async Task DeleteCategoryAsync(Guid categoryId)
     {

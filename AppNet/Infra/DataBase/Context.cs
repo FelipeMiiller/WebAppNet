@@ -9,7 +9,7 @@ public class Context : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source=c:\\db\\category.db;");
+        optionsBuilder.UseSqlite( "Data Source=LocalDatabase.db");
     }
 
 
