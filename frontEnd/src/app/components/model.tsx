@@ -1,64 +1,87 @@
 // components/Modal.js
-import React, { useEffect } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
-import { useForm } from 'react-hook-form';
-import { styleButtonDourado } from './stylesString';
-import api from '@/service/api';
-
+import React, { useEffect } from "react";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+} from "@mui/material";
+import { useForm } from "react-hook-form";
+import { styleButtonDourado } from "./stylesString";
+import api from "@/service/api";
 
 type ModalProps = {
   open: boolean;
   handleClose: () => void;
   item: TCategory | null;
-  create: boolean
-}
+  create: boolean;
+};
 
 const Modal = ({ open, handleClose, item = null }: ModalProps) => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
- console.log(item)
-  console.log(errors);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm();
 
+  useEffect(() => {
+    if (item) {
+      setValue("nome", item.nome);
+    }
+  }, [item, setValue]);
 
   async function onSubmit(data: any) {
-   if(item === null){
-    
-    await api.post('/Category', {nome:data.nome})
-    console.log(data)
-   }else{
+    if (item === null) {
+      try {
+        await api.post("/Category", { nome: data.nome });
+        handleClose()
+      } catch (e) {
+        console.log(e);
+        alert("erro");
+      }
+    } else {
+      try {
+        await api.put("/Category", { id: item.id, nome: data.nome });
 
-    await api.put('/Category', {id:item.id,nome:data.nome})
-    console.log(data)
-   }
+        handleClose()
+      } catch (e) {
+        console.log(e);
+        alert("erro");
+      }
+    }
   }
-  
-
-
-
-
-
-
 
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle className={""}>Categoria de Cliente</DialogTitle>
 
-      <DialogContent >
-        <form className='grid grid-cols-1 gap-6 mt-3' onSubmit={handleSubmit(onSubmit)}>
-          <input type="text" placeholder="nome"
+      <DialogContent>
+        <form
+          className="grid grid-cols-1 gap-6 mt-3"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <input
+            type="text"
+            placeholder="nome"
             className="w-full px-3 py-4 text-sm placeholder-black transition-all duration-150 ease-linear bg-white rounded shadow focus:outline-[#B58710] border-1 text-slate-900 focus:outline-1 "
-            {...register("nome", { required: true, maxLength: 80 })} />
+            {...register("nome", { required: true, maxLength: 80 })}
+          />
 
           {errors.nome && <span>Este campo é obrigatório</span>}
-          <input type="submit" className={styleButtonDourado} value={item === null ? 'Criar' : 'Editar'} />
+          <input
+            type="submit"
+            className={styleButtonDourado}
+            value={item === null ? "Criar" : "Editar"}
+          />
         </form>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
           Fechar
         </Button>
-
       </DialogActions>
-
     </Dialog>
   );
 };

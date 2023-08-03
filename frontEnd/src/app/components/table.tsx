@@ -49,13 +49,15 @@ export default function Table() {
       headerName: "Excluir",
       width: 80,
       renderCell: (params: GridCellParams) => (
-        <button onClick={() => handleDelete(params.row)}>Excluir</button>
+        <button onClick={() => handleDelete(params.row.id)}>Excluir</button>
       ),
     },
   ];
 
   const handleCloseModal = () => {
+    setSelectedItem(null)
     setOpenModal(false);
+  
   };
 
   const handleEdit = (item: TCategory) => {
@@ -65,9 +67,13 @@ export default function Table() {
   };
 
   const handleDelete = async (id: string) => {
-    console.log(`Excluir item com ID ${id}`);
-    const data = { id };
-    await api.delete("/api/Category", { data });
+    try {
+      await api.delete("/Category/", { params: { id } });
+    } catch (e) {
+      console.log(e)
+      alert("Erro ao deletar categoria");
+    }
+  
   };
 
   const handleRowClick = (params: GridCellParams) => {
