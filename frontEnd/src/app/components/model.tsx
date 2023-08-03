@@ -8,7 +8,7 @@ import {
   Button,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { styleButtonDourado } from "./stylesString";
+
 import api from "@/service/api";
 
 type ModalProps = {
@@ -37,7 +37,7 @@ const Modal = ({ open, handleClose, item = null }: ModalProps) => {
     }
   }, [item, setValue]);
 
-  function onSubmit(e:any) {
+  function onSubmit(e: any) {
     const data: THandlerData = e as THandlerData;
     if (item === null) {
       handleCreate(data);
@@ -46,10 +46,9 @@ const Modal = ({ open, handleClose, item = null }: ModalProps) => {
     }
   }
 
- 
-  async function handleCreate(data:THandlerData) {
+  async function handleCreate(data: THandlerData) {
     try {
-      await api.post("/Category", { nome:data.nome });
+      await api.post("/Category", { nome: data.nome });
       handleClose();
     } catch (e) {
       console.log(e);
@@ -57,7 +56,7 @@ const Modal = ({ open, handleClose, item = null }: ModalProps) => {
     }
   }
 
-  async function handleEdit( data:THandlerData ) {
+  async function handleEdit(data: THandlerData) {
     try {
       await api.put("/Category", { id: data.id, nome: data.nome });
 
@@ -87,7 +86,10 @@ const Modal = ({ open, handleClose, item = null }: ModalProps) => {
           {errors.nome && <span>Este campo é obrigatório</span>}
           <input
             type="submit"
-            className={styleButtonDourado}
+            className={
+              " px-4 py-2 font-semibold  rounded-full" +
+              "bg-[#B58710] text-white"
+            }
             value={item === null ? "Criar" : "Editar"}
           />
         </form>

@@ -8,7 +8,7 @@ import {
   GridCellParams,
 } from "@mui/x-data-grid";
 import Modal from "./model";
-import { styleButtonDourado } from "./stylesString";
+
 import api from "@/service/api";
 
 interface Props {
@@ -83,7 +83,7 @@ export default function Table() {
     <div className="flex flex-col bg-[#ffffff] border-8 border-[#ffffff]  rounded-lg">
       <div className="grid grid-cols-3 gap-2 my-4 grip-rows-3">
         <button
-          className={styleButtonDourado}
+          className={" px-4 py-2 font-semibold  rounded-full" + "bg-[#B58710] text-white"}
           onClick={() => setOpenModal(true)}
         >
           Registro
