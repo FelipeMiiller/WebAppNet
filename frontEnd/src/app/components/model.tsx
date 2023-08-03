@@ -15,31 +15,23 @@ type ModalProps = {
 
 const Modal = ({ open, handleClose, item = null }: ModalProps) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+ console.log(item)
   console.log(errors);
 
-  useEffect(() => {
-    if (item) {
-      handleCreate()
-    } else {
-      handleUpdate()
-    }
-  });
 
+  async function onSubmit(data: any) {
+   if(item === null){
+    
+    await api.post('/Category', {nome:data.nome})
+    console.log(data)
+   }else{
 
-  async function handleCreate() {
-    await api.post('/api/Category', item)
-
-
-
+    await api.put('/Category', {id:item.id,nome:data.nome})
+    console.log(data)
+   }
   }
+  
 
-
-  async function handleUpdate() {
-
-    await api.put('/api/Category', item)
-
-  }
 
 
 
@@ -57,7 +49,7 @@ const Modal = ({ open, handleClose, item = null }: ModalProps) => {
             {...register("nome", { required: true, maxLength: 80 })} />
 
           {errors.nome && <span>Este campo é obrigatório</span>}
-          <input type="submit" className={styleButtonDourado} value={item ? 'Criar' : 'Editar'} />
+          <input type="submit" className={styleButtonDourado} value={item === null ? 'Criar' : 'Editar'} />
         </form>
       </DialogContent>
       <DialogActions>

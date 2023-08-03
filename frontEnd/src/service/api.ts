@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 
-const baseURL = 'http://localhost:7077/api';
+const baseURL = 'https://localhost:7077/api';
 
 
 const initialState = {
