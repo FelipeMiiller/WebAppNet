@@ -5,6 +5,7 @@ import * as React from "react";
 import { DataGrid, GridRowsProp, GridColDef, GridCellParams } from "@mui/x-data-grid";
 import Modal from "./model";
 import { styleButtonDourado } from "./stylesString";
+import api from "@/service/api";
 
 
 const rows: GridRowsProp = [
@@ -18,17 +19,13 @@ const rows: GridRowsProp = [
 
 
 
-export type TTableData = {
-    id: string;
-    nome: string;
-};
 
 interface Props {
-    dados: TTableData[];
+    dados:  TCategory[];
 }
 
 export default function Table() {
-    const [selectedItem, setSelectedItem] = React.useState<TTableData| null>(null) ;
+    const [selectedItem, setSelectedItem] = React.useState< TCategory| null>(null) ;
     const [create, setCreate] = React.useState(null)
     const [openModal, setOpenModal] = React.useState(false);
     const [rowSelectedData, setRowSelectedData] = React.useState(null)
@@ -52,9 +49,10 @@ export default function Table() {
 
 
 
-    const handleDelete = (id: string) => {
+  const handleDelete =   async(id: string) => {
         console.log(`Excluir item com ID ${id}`);
-        
+        const data ={id}
+        await api.delete('/api/Category', {data})
     };
 
     const handleRowClick = (params: GridCellParams) => {
