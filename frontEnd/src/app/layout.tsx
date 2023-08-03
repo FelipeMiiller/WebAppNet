@@ -20,7 +20,7 @@ export default function RootLayout({
 
     < ReactQueryProvider>
       <html lang="pt-br">
-      <body className={"w-screen h-screen "}>
+      <body className={"w-screen h-screen  "}>
 
         <div className={"w-screen  mx-auto" + " flex flex-row bg-[#e2e8f0] "}>
           <SideBar />

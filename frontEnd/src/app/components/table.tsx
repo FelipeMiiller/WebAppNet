@@ -16,32 +16,17 @@ interface Props {
 }
 
 export default function Table() {
-  const [selectedItem, setSelectedItem] = React.useState<TCategory | null>(
-    null
-  );
-
+  const [selectedItem, setSelectedItem] = React.useState<TCategory | null>(null);
   const [openModal, setOpenModal] = React.useState(false);
-  const [rows, setRows] = React.useState<GridColDef[]>([]);
-
-  React.useEffect(() => {
-    async function fetchData() {
-      const list = await api.get("/Category/all");
-
-      console.log(list.data);
-      setRows(list.data);
-    }
-    fetchData();
-  }, [openModal]);
-
-
-  const {data,isLoading}= useQuery<TCategory[]>({
+  const { data, isLoading } = useQuery<TCategory[]>({
     queryKey: ["Categoryies"],
-    queryFn: () => api.get("/Category/all").then((res) => res.data),
-    
-  }) 
+    queryFn: () => api.get("Category/all").then((res) => res.data),
 
-  if(isLoading || !data){
-    return (<Loading/>)
+  })
+
+  if (isLoading || !data) {
+    return (<Loading />)
+    console.log(data)
   }
 
   const columns: GridColDef[] = [
@@ -78,7 +63,8 @@ export default function Table() {
 
   const handleDelete = async (id: string) => {
     try {
-      await api.delete("/Category/", { params: { id } });
+      await api.delete("Category/", { params: { id } });
+      alert("Categoria deletada com sucesso");
     } catch (e) {
       console.log(e);
       alert("Erro ao deletar categoria");

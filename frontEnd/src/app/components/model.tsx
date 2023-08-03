@@ -49,6 +49,7 @@ const Modal = ({ open, handleClose, item = null }: ModalProps) => {
   async function handleCreate(data: THandlerData) {
     try {
       await api.post("/Category", { nome: data.nome });
+      alert("Categoria criada com sucesso");
       handleClose();
     } catch (e) {
       console.log(e);
@@ -58,8 +59,9 @@ const Modal = ({ open, handleClose, item = null }: ModalProps) => {
 
   async function handleEdit(data: THandlerData) {
     try {
-      await api.put("/Category", { id: data.id, nome: data.nome });
-
+ 
+      await api.put("/Category", { id: item?.id , nome: data.nome });
+      alert("Categoria editada com sucesso");
       handleClose();
     } catch (e) {
       console.log(e);
@@ -87,8 +89,8 @@ const Modal = ({ open, handleClose, item = null }: ModalProps) => {
           <input
             type="submit"
             className={
-              " px-4 py-2 font-semibold  rounded-full " +
-              "bg-[#B58710] text-white"
+              " px-4 py-2 font-semibold  rounded-full" +
+              " bg-[#B58710] text-white"
             }
             value={item === null ? "Criar" : "Editar"}
           />

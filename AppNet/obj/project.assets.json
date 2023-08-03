@@ -1988,24 +1988,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\felip\\.nuget\\packages\\": {}
+    "/home/felipe/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\git\\WebAppNet\\WebAppNet\\AppNet\\AppNet.csproj",
+      "projectUniqueName": "/home/felipe/git/test/WebAppNet/AppNet/AppNet.csproj",
       "projectName": "AppNet",
-      "projectPath": "C:\\git\\WebAppNet\\WebAppNet\\AppNet\\AppNet.csproj",
-      "packagesPath": "C:\\Users\\felip\\.nuget\\packages\\",
-      "outputPath": "C:\\git\\WebAppNet\\WebAppNet\\AppNet\\obj\\",
+      "projectPath": "/home/felipe/git/test/WebAppNet/AppNet/AppNet.csproj",
+      "packagesPath": "/home/felipe/.nuget/packages/",
+      "outputPath": "/home/felipe/git/test/WebAppNet/AppNet/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\felip\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/felipe/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "/snap/dotnet-sdk/216/sdk/7.0.306/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2070,7 +2071,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.109\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/216/sdk/7.0.306/RuntimeIdentifierGraph.json"
       }
     }
   }
