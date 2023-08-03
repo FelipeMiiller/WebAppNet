@@ -18,6 +18,11 @@ type ModalProps = {
   create: boolean;
 };
 
+type THandlerData = {
+  id: string;
+  nome: string;
+};
+
 const Modal = ({ open, handleClose, item = null }: ModalProps) => {
   const {
     register,
@@ -32,24 +37,34 @@ const Modal = ({ open, handleClose, item = null }: ModalProps) => {
     }
   }, [item, setValue]);
 
-  async function onSubmit(data: any) {
+  function onSubmit(e:any) {
+    const data: THandlerData = e as THandlerData;
     if (item === null) {
-      try {
-        await api.post("/Category", { nome: data.nome });
-        handleClose()
-      } catch (e) {
-        console.log(e);
-        alert("erro");
-      }
+      handleCreate(data);
     } else {
-      try {
-        await api.put("/Category", { id: item.id, nome: data.nome });
+      handleEdit(data);
+    }
+  }
 
-        handleClose()
-      } catch (e) {
-        console.log(e);
-        alert("erro");
-      }
+ 
+  async function handleCreate(data:THandlerData) {
+    try {
+      await api.post("/Category", { nome:data.nome });
+      handleClose();
+    } catch (e) {
+      console.log(e);
+      alert("erro");
+    }
+  }
+
+  async function handleEdit( data:THandlerData ) {
+    try {
+      await api.put("/Category", { id: data.id, nome: data.nome });
+
+      handleClose();
+    } catch (e) {
+      console.log(e);
+      alert("erro");
     }
   }
 

@@ -1,24 +1,7 @@
-import axios from 'axios';
-
-
-
-
-
-
-
-
-const baseURL = 'https://localhost:7077/api';
-
-
-const initialState = {
-    user: { name: '', email: '' },
-    list: []
-}
-
+import axios from "axios";
 
 const api = axios.create({
-    baseURL,
-    
+  baseURL: "https://localhost:7077/api",
 });
 
 export default api;

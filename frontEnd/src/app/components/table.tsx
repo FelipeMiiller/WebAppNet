@@ -55,9 +55,8 @@ export default function Table() {
   ];
 
   const handleCloseModal = () => {
-    setSelectedItem(null)
+    setSelectedItem(null);
     setOpenModal(false);
-  
   };
 
   const handleEdit = (item: TCategory) => {
@@ -70,10 +69,9 @@ export default function Table() {
     try {
       await api.delete("/Category/", { params: { id } });
     } catch (e) {
-      console.log(e)
+      console.log(e);
       alert("Erro ao deletar categoria");
     }
-  
   };
 
   const handleRowClick = (params: GridCellParams) => {
@@ -91,15 +89,7 @@ export default function Table() {
           Registro
         </button>
       </div>
-      <div
-        style={{
-          height: 300,
-          width: "100%",
-          backgroundColor: "#ffffff",
-          borderRadius: "2px",
-          minWidth: "32rem ",
-        }}
-      >
+      <div className={"h-300 w-full bg-white rounded-2px min-w-[32rem]"}>
         <DataGrid
           rows={rows}
           columns={columns}
