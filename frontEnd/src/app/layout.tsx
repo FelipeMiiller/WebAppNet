@@ -1,8 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import { SideBar } from './components/sidebar'
-import { Header } from './components/header'
+import { ReactQueryProvider } from './ReactQueryProvider'
+
 
 
 export const metadata: Metadata = {
@@ -10,15 +10,18 @@ export const metadata: Metadata = {
   description: 'Dashboard for Clients',
 }
 
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-br">
-      <body className={ "w-screen h-screen "}>
-       
+
+    < ReactQueryProvider>
+      <html lang="pt-br">
+      <body className={"w-screen h-screen "}>
+
         <div className={"w-screen  mx-auto" + " flex flex-row bg-[#e2e8f0] "}>
           <SideBar />
           {children}
@@ -26,6 +29,7 @@ export default function RootLayout({
 
       </body>
     </html>
+    </ReactQueryProvider>
   )
 }
 

@@ -3,13 +3,13 @@
 import * as React from "react";
 import {
   DataGrid,
-  GridRowsProp,
-  GridColDef,
   GridCellParams,
+  GridColDef,
 } from "@mui/x-data-grid";
 import Modal from "./model";
-
 import api from "@/service/api";
+import { useQuery } from "react-query";
+import Loading from "./loading";
 
 interface Props {
   dados: TCategory[];
@@ -32,6 +32,17 @@ export default function Table() {
     }
     fetchData();
   }, [openModal]);
+
+
+  const {data,isLoading}= useQuery<TCategory[]>({
+    queryKey: ["Categoryies"],
+    queryFn: () => api.get("/Category/all").then((res) => res.data),
+    
+  }) 
+
+  if(isLoading || !data){
+    return (<Loading/>)
+  }
 
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID", width: 200 },
@@ -80,10 +91,10 @@ export default function Table() {
   };
 
   return (
-    <div className="flex flex-col bg-[#ffffff] border-8 border-[#ffffff]  rounded-lg">
+    <div className="  flex flex-col bg-[#ffffff] border-8 border-[#ffffff]  rounded-lg">
       <div className="grid grid-cols-3 gap-2 my-4 grip-rows-3">
         <button
-          className={" px-4 py-2 font-semibold  rounded-full" + "bg-[#B58710] text-white"}
+          className={" px-4 py-2 font-semibold  rounded-full " + "bg-[#B58710] text-white"}
           onClick={() => setOpenModal(true)}
         >
           Registro
@@ -91,7 +102,7 @@ export default function Table() {
       </div>
       <div className={"h-300 w-full bg-white rounded-2px min-w-[32rem]"}>
         <DataGrid
-          rows={rows}
+          rows={data}
           columns={columns}
           onRowClick={() => handleRowClick}
         />

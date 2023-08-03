@@ -87,7 +87,7 @@ const Modal = ({ open, handleClose, item = null }: ModalProps) => {
           <input
             type="submit"
             className={
-              " px-4 py-2 font-semibold  rounded-full" +
+              " px-4 py-2 font-semibold  rounded-full " +
               "bg-[#B58710] text-white"
             }
             value={item === null ? "Criar" : "Editar"}
